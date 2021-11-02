@@ -1,15 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import Activity from "../components/Activity";
+import SearchForm from "../components/SearchForm";
 
-import { startLoading, activitiesFetched } from "../store/activities/actions";
+import { loadActivities } from "../store/activities/actions";
 import {
   selectActivitiesLoading,
   selectActivities,
 } from "../store/activities/selectors";
-
-const API_URL = `http://localhost:4000/activities`;
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -17,17 +15,8 @@ export default function HomePage() {
   const loading = useSelector(selectActivitiesLoading);
   const listOfActivities = useSelector(selectActivities);
 
-  const search = async () => {
-    dispatch(startLoading());
-    const res = await axios.get(`${API_URL}`);
-
-    const loadedActivities = res.data;
-
-    dispatch(activitiesFetched(loadedActivities));
-  };
-
   useEffect(() => {
-    search();
+    dispatch(loadActivities());
   }, []);
 
   return (
@@ -37,6 +26,7 @@ export default function HomePage() {
         <em>Loading...</em>
       ) : (
         <div>
+          <SearchForm />
           <div
             style={{
               display: "flex",
