@@ -21,7 +21,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1>Activities</h1>
+      <h1>List activities for your child with us!</h1>
       {loading ? (
         <em>Loading...</em>
       ) : (

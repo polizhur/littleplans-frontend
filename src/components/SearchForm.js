@@ -16,7 +16,6 @@ export default function SearchForm() {
   }
   return (
     <div>
-      <h1>Search</h1>
       <form>
         <p>
           <label>
