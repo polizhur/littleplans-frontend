@@ -35,7 +35,10 @@ export default function HomePage() {
             }}
           >
             {listOfActivities.map((activity) => (
-              <Activity key={activity.id} activity={activity} />
+              <div key={activity.id}>
+                <Activity activity={activity} />
+                <button>Add to my calendar</button>
+              </div>
             ))}
           </div>
         </div>
