@@ -27,11 +27,21 @@ export default (state = initialState, action) => {
       return { ...state, ...action.payload };
 
     case DELETE_ACTIVITY_SUCCESS:
-      const activityId = action.payload;
-      return { ...state };
+      const userActivityId = parseInt(action.payload);
+      const updatedUserActivities = state.userActivities.filter(
+        (userActivity) => userActivity.id !== userActivityId
+      );
+
+      return {
+        ...state,
+        userActivities: updatedUserActivities,
+      };
 
     case ADD_USERACTIVITY_SUCCESS:
-      return { ...state };
+      return {
+        ...state,
+        userActivities: [...state.userActivities, action.payload],
+      };
 
     default:
       return state;
