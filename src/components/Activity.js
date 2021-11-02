@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import Address from "./Address";
+
 export default function Activity({ activity }) {
   return (
     <div
@@ -18,7 +20,9 @@ export default function Activity({ activity }) {
         src={activity.imageUrl}
       />
       <p>Date: {activity.date}</p>
-      <p>{activity.address}</p>
+      <p>
+        Location: <Address address={activity.address} />
+      </p>
       <p>Age: {activity.ageGroup}</p>
       <Link to={"/activities/" + activity.id}>View details</Link>
     </div>
