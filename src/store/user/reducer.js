@@ -3,6 +3,7 @@ import {
   LOGIN_SUCCESS,
   TOKEN_STILL_VALID,
   DELETE_ACTIVITY_SUCCESS,
+  ADD_USERACTIVITY_SUCCESS,
 } from "./actions";
 
 const initialState = {
@@ -27,6 +28,9 @@ export default (state = initialState, action) => {
 
     case DELETE_ACTIVITY_SUCCESS:
       const activityId = action.payload;
+      return { ...state };
+
+    case ADD_USERACTIVITY_SUCCESS:
       return { ...state };
 
     default:

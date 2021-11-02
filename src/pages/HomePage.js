@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Activity from "../components/Activity";
 import SearchForm from "../components/SearchForm";
+import { addUserActivity } from "../store/user/actions";
 
 import { loadActivities } from "../store/activities/actions";
 import {
@@ -18,6 +19,11 @@ export default function HomePage() {
   useEffect(() => {
     dispatch(loadActivities());
   }, []);
+
+  const onAdd = (id) => {
+    console.log("adding activity!", id);
+    dispatch(addUserActivity(id));
+  };
 
   return (
     <div>
@@ -37,7 +43,9 @@ export default function HomePage() {
             {listOfActivities.map((activity) => (
               <div key={activity.id}>
                 <Activity activity={activity} />
-                <button>Add to my calendar</button>
+                <button onClick={() => onAdd(activity.id)}>
+                  Add to my calendar
+                </button>
               </div>
             ))}
           </div>
