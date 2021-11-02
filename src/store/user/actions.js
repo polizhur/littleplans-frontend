@@ -1,6 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectToken } from "./selectors";
+import { selectToken, selectUser } from "./selectors";
 import {
   appLoading,
   appDoneLoading,
@@ -11,11 +11,19 @@ import {
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
+export const DELETE_ACTIVITY_SUCCESS = "DELETE_ACTIVITY_SUCCESS";
 
 const loginSuccess = (userWithToken) => {
   return {
     type: LOGIN_SUCCESS,
     payload: userWithToken,
+  };
+};
+
+const deleteActivitySuccess = (activityId) => {
+  return {
+    type: DELETE_ACTIVITY_SUCCESS,
+    payload: activityId,
   };
 };
 
@@ -105,6 +113,40 @@ export const getUserWithStoredToken = () => {
       // if we get a 4xx or 5xx response,
       // get rid of the token by logging out
       dispatch(logOut());
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const deleteUserActivity = (userActivityId) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+
+    // if we have no token, stop
+    if (token === null) return;
+
+    dispatch(appLoading());
+    try {
+      const response = await axios.delete(
+        `${apiUrl}/userActivities/${userActivityId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      dispatch(deleteActivitySuccess(userActivityId));
+      dispatch(appDoneLoading());
+      dispatch(
+        showMessageWithTimeout("success", false, response.data.message, 1500)
+      );
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("danger", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("danger", true, error.message));
+      }
       dispatch(appDoneLoading());
     }
   };

@@ -1,9 +1,15 @@
-import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID } from "./actions";
+import {
+  LOG_OUT,
+  LOGIN_SUCCESS,
+  TOKEN_STILL_VALID,
+  DELETE_ACTIVITY_SUCCESS,
+} from "./actions";
 
 const initialState = {
   token: localStorage.getItem("token"),
   name: null,
-  email: null
+  email: null,
+  userActivities: [],
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +24,10 @@ export default (state = initialState, action) => {
 
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };
+
+    case DELETE_ACTIVITY_SUCCESS:
+      const activityId = action.payload;
+      return { ...state };
 
     default:
       return state;
