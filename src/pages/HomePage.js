@@ -17,12 +17,12 @@ export default function HomePage() {
 
   const loading = useSelector(selectActivitiesLoading);
   const listOfActivities = useSelector(selectActivities);
-  const [filteredActivitites, setFilteredActivitites] =
+  const [filteredActivities, setFilteredActivities] =
     useState(listOfActivities);
 
   useEffect(() => {
     if (!listOfActivities.length) dispatch(loadActivities());
-    setFilteredActivitites(listOfActivities);
+    setFilteredActivities(listOfActivities);
   }, [listOfActivities]);
 
   const onAdd = (id) => {
@@ -31,7 +31,7 @@ export default function HomePage() {
 
   const triggerFilter = (conditions) => {
     const activitiesFiltered = eventFilter(listOfActivities, conditions);
-    setFilteredActivitites(activitiesFiltered);
+    setFilteredActivities(activitiesFiltered);
   };
 
   return (
@@ -49,7 +49,7 @@ export default function HomePage() {
               margin: "0 -10px",
             }}
           >
-            {filteredActivitites.map((activity) => (
+            {filteredActivities.map((activity) => (
               <div key={activity.id}>
                 <Activity activity={activity} />
                 <button onClick={() => onAdd(activity.id)}>
