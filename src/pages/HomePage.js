@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import Activity from "../components/Activity";
 import SearchForm from "../components/SearchForm";
 import { addUserActivity } from "../store/user/actions";

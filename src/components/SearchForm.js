@@ -17,7 +17,7 @@ export default function SearchForm() {
   return (
     <div>
       <form>
-        <p>
+        <div>
           <label>
             Name:{" "}
             <input
@@ -26,7 +26,7 @@ export default function SearchForm() {
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-        </p>
+        </div>
         <label>
           Category:{" "}
           <input
@@ -51,11 +51,11 @@ export default function SearchForm() {
             onChange={(e) => setAge(e.target.value)}
           />
         </label>
-        <p>
+        <div>
           <button type="submit" onClick={submitForm}>
             Search
           </button>
-        </p>
+        </div>
       </form>
     </div>
   );

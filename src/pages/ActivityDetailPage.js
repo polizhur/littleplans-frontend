@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import moment from "moment";
 import Address from "../components/Address";
 import Category from "../components/Category";
 
@@ -37,24 +38,22 @@ export default function ActivityDetailPage() {
 
   return (
     <div className="ActivityDetailPage">
-      <div>
-        <h1>{activity.title}</h1>
-        <img alt={activity.title} src={activity.imageUrl} />
-        <div className="details">
-          <h3>Category:</h3>
-          <Category category={activity.category} />
-          <h3>Location:</h3>
-          <Address address={activity.address} />
-          <h3>Date:</h3>
-          <p>{activity.date}</p>
-          <h3>Duration:</h3>
-          <p>{activity.duration}</p>
-          <h3>Age:</h3>
-          <p>{activity.ageGroup}</p>
-          <h3>About:</h3>
-          <p>{activity.description}</p>
-          <button>Add to my calendar</button>
-        </div>
+      <h1>{activity.title}</h1>
+      <img alt={activity.title} src={activity.imageUrl} />
+      <div className="details">
+        <h3>Category:</h3>
+        <Category category={activity.category} />
+        <h3>Location:</h3>
+        <Address address={activity.address} />
+        <h3>Date:</h3>
+        <p>{moment(activity.date).format("LLL")}</p>
+        <h3>Duration:</h3>
+        <p>{activity.duration}</p>
+        <h3>Age:</h3>
+        <p>{activity.ageGroup.range}</p>
+        <h3>About:</h3>
+        <p>{activity.description}</p>
+        <button>Add to my calendar</button>
       </div>
     </div>
   );
