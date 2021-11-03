@@ -5,9 +5,9 @@ import Activity from "../components/Activity";
 import { deleteUserActivity } from "../store/user/actions";
 
 export default function MyCalendar() {
-  const userActivities = useSelector(selectUserActivities);
+  const activities = useSelector(selectUserActivities);
   const dispatch = useDispatch();
-  console.log("activity", userActivities);
+  console.log("activity", activities);
 
   const onDelete = (id) => {
     console.log("deleting activity!", id);
@@ -16,10 +16,10 @@ export default function MyCalendar() {
 
   return (
     <div className="My Calendar">
-      {userActivities.map((userActivity) => (
-        <div key={userActivity.activityId}>
-          <Activity activity={userActivity.activity} />
-          <button onClick={() => onDelete(userActivity.id)}>
+      {activities.map((activity) => (
+        <div key={activity.activityId}>
+          <Activity activity={activity} />
+          <button onClick={() => onDelete(activity.id)}>
             Delete from my calendar
           </button>
         </div>

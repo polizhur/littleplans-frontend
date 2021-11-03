@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loadActivities } from "../store/activities/actions";
 
-export default function SearchForm() {
+export default function SearchForm(props) {
   const dispatch = useDispatch();
+  const { triggerFilter } = props;
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
@@ -11,8 +12,8 @@ export default function SearchForm() {
 
   function submitForm(event) {
     event.preventDefault();
-
-    dispatch(loadActivities(name, category, date, age));
+    triggerFilter({ name, category, date, age });
+    // dispatch(loadActivities(name, category, date, age));
   }
   return (
     <div>
@@ -27,7 +28,7 @@ export default function SearchForm() {
             />
           </label>
         </div>
-        <label>
+        {/* <label>
           Category:{" "}
           <input
             type="text"
@@ -50,7 +51,7 @@ export default function SearchForm() {
             value={age}
             onChange={(e) => setAge(e.target.value)}
           />
-        </label>
+        </label> */}
         <div>
           <button type="submit" onClick={submitForm}>
             Search

@@ -10,7 +10,7 @@ const initialState = {
   token: localStorage.getItem("token"),
   name: null,
   email: null,
-  userActivities: [],
+  activities: [],
 };
 
 export default (state = initialState, action) => {
@@ -34,13 +34,13 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        userActivities: updatedUserActivities,
+        activities: updatedUserActivities,
       };
 
     case ADD_USERACTIVITY_SUCCESS:
       return {
         ...state,
-        userActivities: [...state.userActivities, action.payload],
+        activities: [...state.userActivities, action.payload],
       };
 
     default:

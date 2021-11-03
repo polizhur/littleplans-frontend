@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { eventFilter } from "../Lib/eventFilter";
 
 import Activity from "../components/Activity";
 import SearchForm from "../components/SearchForm";
@@ -16,14 +17,21 @@ export default function HomePage() {
 
   const loading = useSelector(selectActivitiesLoading);
   const listOfActivities = useSelector(selectActivities);
+  const [filteredActivitites, setFilteredActivitites] =
+    useState(listOfActivities);
 
   useEffect(() => {
-    dispatch(loadActivities());
-  }, []);
+    if (!listOfActivities.length) dispatch(loadActivities());
+    setFilteredActivitites(listOfActivities);
+  }, [listOfActivities]);
 
   const onAdd = (id) => {
-    console.log("adding activity!", id);
     dispatch(addUserActivity(id));
+  };
+
+  const triggerFilter = (conditions) => {
+    const activitiesFiltered = eventFilter(listOfActivities, conditions);
+    setFilteredActivitites(activitiesFiltered);
   };
 
   return (
@@ -33,7 +41,7 @@ export default function HomePage() {
         <em>Loading...</em>
       ) : (
         <div>
-          <SearchForm />
+          <SearchForm triggerFilter={triggerFilter} />
           <div
             style={{
               display: "flex",
@@ -41,7 +49,7 @@ export default function HomePage() {
               margin: "0 -10px",
             }}
           >
-            {listOfActivities.map((activity) => (
+            {filteredActivitites.map((activity) => (
               <div key={activity.id}>
                 <Activity activity={activity} />
                 <button onClick={() => onAdd(activity.id)}>
