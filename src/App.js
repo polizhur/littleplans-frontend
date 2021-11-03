@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import HomePage from "./pages/HomePage";
 import ActivityDetailPage from "./pages/ActivityDetailPage";
 import MyCalendar from "./pages/MyCalendar";
+import MyProfile from "./pages/MyProfile";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
@@ -44,7 +45,7 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route path="/activities/:id" component={ActivityDetailPage} />
         <Route path="/mycalendar" component={MyCalendar} />
-        <Route path="/other" component={Other} />
+        <Route path="/myprofile" component={MyProfile} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
       </Switch>

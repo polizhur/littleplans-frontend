@@ -1,3 +1,5 @@
+import { ACTIVITY_POST_SUCCESS } from "./actions";
+
 const initialState = {
   loading: false,
   activities: [],
@@ -17,6 +19,11 @@ export default function activitiesSliceReducer(state = initialState, action) {
         activities: [...action.payload],
       };
     }
+    case ACTIVITY_POST_SUCCESS:
+      return {
+        ...state,
+        activities: [...state.activities, action.payload],
+      };
     default: {
       return state;
     }
