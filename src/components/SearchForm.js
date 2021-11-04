@@ -1,26 +1,62 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { loadActivities } from "../store/activities/actions";
+import React, { useState, useEffect } from "react";
 
 export default function SearchForm(props) {
-  // const dispatch = useDispatch();
-  const { triggerFilter, value, setValue, label } = props;
+  const { triggerFilter } = props;
+
+  const [name, setName] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [date, setDate] = useState("");
+  const [ageGroupId, setAgeGroupId] = useState("");
 
   function submitForm(event) {
     event.preventDefault();
-    triggerFilter(value);
-    // dispatch(loadActivities(name, category, date, age));
+    const conditions = { name, categoryId, date, ageGroupId };
+    triggerFilter(conditions);
   }
+
   return (
     <div>
       <form>
         <div>
           <label>
-            {label}:
+            Name:
             <input
               type="text"
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Category:
+            <input
+              type="text"
+              value={categoryId}
+              onChange={(e) => setCategoryId(e.target.value)}
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Date:
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Age group:
+            <input
+              type="text"
+              value={ageGroupId}
+              onChange={(e) => setAgeGroupId(e.target.value)}
             />
           </label>
         </div>

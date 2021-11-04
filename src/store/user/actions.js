@@ -127,7 +127,7 @@ export const getUserWithStoredToken = () => {
   };
 };
 
-export const deleteUserActivity = (userActivityId) => {
+export const deleteUserActivity = (activityId) => {
   return async (dispatch, getState) => {
     const token = selectToken(getState());
 
@@ -137,13 +137,13 @@ export const deleteUserActivity = (userActivityId) => {
     dispatch(appLoading());
     try {
       const response = await axios.delete(
-        `${apiUrl}/userActivities/${userActivityId}`,
+        `${apiUrl}/userActivities/${activityId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
 
-      dispatch(deleteActivitySuccess(userActivityId));
+      dispatch(deleteActivitySuccess(activityId));
       dispatch(appDoneLoading());
       dispatch(
         showMessageWithTimeout("success", false, response.data.message, 1500)
