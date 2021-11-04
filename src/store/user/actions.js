@@ -28,10 +28,10 @@ const deleteActivitySuccess = (activityId) => {
   };
 };
 
-const addUserActivitySuccess = (userActivity) => {
+const addUserActivitySuccess = (activity) => {
   return {
     type: ADD_USERACTIVITY_SUCCESS,
-    payload: userActivity,
+    payload: activity,
   };
 };
 
@@ -180,7 +180,7 @@ export const addUserActivity = (activityId) => {
         }
       );
       console.log(response.data);
-      dispatch(addUserActivitySuccess(response.data.userActivity));
+      dispatch(addUserActivitySuccess(response.data.activity));
       dispatch(appDoneLoading());
       dispatch(
         showMessageWithTimeout("success", false, response.data.message, 1500)
