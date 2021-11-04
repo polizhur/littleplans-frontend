@@ -27,8 +27,8 @@ export default function HomePage() {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
   const [ageFilter, setAgeFilter] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [ageGroups, setAgeGroups] = useState([]);
+  // const [categories, setCategories] = useState([]);
+  // const [ageGroups, setAgeGroups] = useState([]);
 
   useEffect(() => {
     if (!listOfActivities.length) dispatch(loadActivities());
