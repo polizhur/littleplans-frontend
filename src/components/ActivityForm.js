@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postActivity } from "../store/activities/actions";
+import Axios from "axios";
 
 export default function ActivityForm() {
   const dispatch = useDispatch();
@@ -20,6 +21,28 @@ export default function ActivityForm() {
   const [description, setDescription] = useState("");
   const [ageGroupId, setAgeGroupId] = useState("");
   const [isParentRequired, setisParentRequired] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [ageGroups, setAgeGroups] = useState([]);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const categoryResponse = await Axios.get(
+        "http://localhost:4000/categories"
+      );
+      setCategories(categoryResponse.data);
+    };
+    getCategories();
+  }, []);
+
+  useEffect(() => {
+    const getAgeGroups = async () => {
+      const ageGroupResponse = await Axios.get(
+        "http://localhost:4000/ageGroups"
+      );
+      setAgeGroups(ageGroupResponse.data);
+    };
+    getAgeGroups();
+  }, []);
 
   function submitForm(event) {
     event.preventDefault();
@@ -76,11 +99,16 @@ export default function ActivityForm() {
         <img src={`${imageUrl}`} />
         <label>
           Category:{" "}
-          <input
-            type="text"
+          <select
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-          />
+          >
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
         </label>
         <label>
           Street:{" "}
@@ -172,11 +200,16 @@ export default function ActivityForm() {
         </label>
         <label>
           Age group:{" "}
-          <input
-            type="text"
+          <select
             value={ageGroupId}
             onChange={(e) => setAgeGroupId(e.target.value)}
-          />
+          >
+            {ageGroups.map((ageGroup) => (
+              <option key={ageGroup.id} value={ageGroup.id}>
+                {ageGroup.range}
+              </option>
+            ))}
+          </select>
         </label>
         <label htmlFor="isParentRequired">
           <input
