@@ -24,6 +24,13 @@ export function activitiesFetched(activities) {
   };
 }
 
+export function setError(error) {
+  return {
+    type: "activities/setError",
+    payload: error,
+  };
+}
+
 export const loadActivities = () => {
   return async (dispatch, getState) => {
     dispatch(startLoading());
@@ -61,39 +68,45 @@ export const postActivity = (
   return async (dispatch, getState) => {
     const { token } = selectUser(getState());
     dispatch(appLoading());
-
-    const response = await axios.post(
-      `${apiUrl}/activities`,
-      {
-        title,
-        imageUrl,
-        categoryId,
-        street,
-        number,
-        postcode,
-        city,
-        country,
-        longitude,
-        latitude,
-        date,
-        duration,
-        capacity,
-        description,
-        ageGroupId,
-        isParentRequired,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+    try {
+      const response = await axios.post(
+        `${apiUrl}/activities`,
+        {
+          title,
+          imageUrl,
+          categoryId,
+          street,
+          number,
+          postcode,
+          city,
+          country,
+          longitude,
+          latitude,
+          date,
+          duration,
+          capacity,
+          description,
+          ageGroupId,
+          isParentRequired,
         },
-      }
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(
+        showMessageWithTimeout("success", false, response.data.message, 3000)
+      );
+      dispatch(activityPostSuccess(response.data.activity));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      console.log("something went wrong");
+      console.log(error.response.data.message);
+      dispatch(setError(error.response.data.message));
+      dispatch(appDoneLoading());
+    }
 
     // console.log("Yep!", response);
-    dispatch(
-      showMessageWithTimeout("success", false, response.data.message, 3000)
-    );
-    dispatch(activityPostSuccess(response.data.activity));
-    dispatch(appDoneLoading());
   };
 };

@@ -20,9 +20,9 @@ export default function Activity({ activity }) {
         src={activity.imageUrl}
       />
       <p>Date: {moment(activity.date).format("LLL")}</p>
-      <p>
-        Location: <Address address={activity.address} />
-      </p>
+      <div>
+        <p>Location:</p> <Address address={activity.address} />
+      </div>
       <p>Age: {activity.ageGroup.range}</p>
       <Link to={"/activities/" + activity.id}>View details</Link>
     </div>

@@ -30,6 +30,8 @@ export default function ActivityForm() {
         "http://localhost:4000/categories"
       );
       setCategories(categoryResponse.data);
+      console.log(categoryResponse.data[0].id);
+      setCategoryId(categoryResponse.data[0].id);
     };
     getCategories();
   }, []);
@@ -40,6 +42,7 @@ export default function ActivityForm() {
         "http://localhost:4000/ageGroups"
       );
       setAgeGroups(ageGroupResponse.data);
+      setAgeGroupId(ageGroupResponse.data[0].id);
     };
     getAgeGroups();
   }, []);

@@ -3,6 +3,7 @@ import { ACTIVITY_POST_SUCCESS } from "./actions";
 const initialState = {
   loading: false,
   activities: [],
+  error: "",
 };
 
 export default function activitiesSliceReducer(state = initialState, action) {
@@ -17,6 +18,12 @@ export default function activitiesSliceReducer(state = initialState, action) {
       return {
         loading: false,
         activities: [...action.payload],
+      };
+    }
+    case "activities/setError": {
+      return {
+        loading: false,
+        error: action.payload,
       };
     }
     case ACTIVITY_POST_SUCCESS:
