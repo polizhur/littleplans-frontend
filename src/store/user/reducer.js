@@ -16,6 +16,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
+      console.log(action.payload);
       localStorage.setItem("token", action.payload.token);
       return { ...state, ...action.payload };
 
@@ -28,7 +29,7 @@ export default (state = initialState, action) => {
 
     case DELETE_ACTIVITY_SUCCESS:
       const userActivityId = parseInt(action.payload);
-      const updatedUserActivities = state.userActivities.filter(
+      const updatedUserActivities = state.activities.filter(
         (userActivity) => userActivity.id !== userActivityId
       );
 
@@ -40,7 +41,7 @@ export default (state = initialState, action) => {
     case ADD_USERACTIVITY_SUCCESS:
       return {
         ...state,
-        activities: [...state.userActivities, action.payload],
+        activities: [...state.activities, action.payload],
       };
 
     default:

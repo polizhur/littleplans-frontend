@@ -179,7 +179,7 @@ export const addUserActivity = (activityId) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
+      console.log(response.data);
       dispatch(addUserActivitySuccess(response.data.userActivity));
       dispatch(appDoneLoading());
       dispatch(
