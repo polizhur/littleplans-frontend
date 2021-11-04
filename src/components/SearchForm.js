@@ -38,6 +38,17 @@ export default function SearchForm(props) {
     triggerFilter(conditions);
   }
 
+  function clearFilters(event) {
+    event.preventDefault();
+    setName("");
+    setCategoryId("");
+    setDate("");
+    setAgeGroupId("");
+
+    const conditions = {};
+    triggerFilter(conditions);
+  }
+
   return (
     <div>
       <form>
@@ -100,6 +111,9 @@ export default function SearchForm(props) {
         <div>
           <button type="submit" onClick={submitForm}>
             Search
+          </button>
+          <button type="submit" onClick={clearFilters}>
+            Show all activities
           </button>
         </div>
       </form>
