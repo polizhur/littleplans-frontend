@@ -40,11 +40,14 @@ export default function SearchForm(props) {
 
   function clearFilters(event) {
     event.preventDefault();
+
+    // clear form
     setName("");
     setCategoryId("");
     setDate("");
     setAgeGroupId("");
 
+    // apply empty conditions
     const conditions = {};
     triggerFilter(conditions);
   }

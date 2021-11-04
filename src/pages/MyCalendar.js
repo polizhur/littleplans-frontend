@@ -21,7 +21,7 @@ export default function MyCalendar() {
   return (
     <div className="My Calendar">
       {activities.map((activity) => (
-        <div key={activity.activityId}>
+        <div key={activity.id}>
           <Activity activity={activity} />
           <button onClick={() => onDelete(activity.id)}>
             Delete from my calendar

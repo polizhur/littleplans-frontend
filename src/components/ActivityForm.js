@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { postActivity } from "../store/activities/actions";
 import Axios from "axios";
 
@@ -21,6 +21,7 @@ export default function ActivityForm() {
   const [description, setDescription] = useState("");
   const [ageGroupId, setAgeGroupId] = useState("");
   const [isParentRequired, setisParentRequired] = useState(false);
+
   const [categories, setCategories] = useState([]);
   const [ageGroups, setAgeGroups] = useState([]);
 
@@ -70,6 +71,22 @@ export default function ActivityForm() {
         isParentRequired
       )
     );
+    setTitle("");
+    setImageUrl("");
+    setCategoryId("");
+    setStreet("");
+    setNumber("");
+    setPostcode("");
+    setCity("");
+    setCountry("");
+    setLongitude("");
+    setLatitude("");
+    setDate("");
+    setDuration("");
+    setCapacity("");
+    setDescription("");
+    setAgeGroupId("");
+    setisParentRequired(false);
   }
 
   const handleChange = () => {
