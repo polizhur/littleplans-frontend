@@ -37,7 +37,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
+    <div>
       <Navigation />
       <MessageBox />
       {isLoading ? <Loading /> : null}

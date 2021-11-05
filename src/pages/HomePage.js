@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { filterActivites } from "../Lib/filterActivites";
 
 import Activity from "../components/Activity";
@@ -50,6 +50,45 @@ export default function HomePage() {
               margin: "0 -10px",
             }}
           >
+            <MapContainer
+              style={{
+                border: "2px solid",
+                borderRadius: "10px",
+                height: "50vw",
+                width: "60vw",
+                maxWidth: "1000px",
+                maxHeight: "800px",
+                margin: "0px 18%",
+              }}
+              center={[52.36994, 4.906]}
+              zoom={13}
+              scrollWheelZoom={true}
+            >
+              <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              {filteredActivities.map((activity) => (
+                // the marker is every pointer you see on the map
+                <Marker
+                  key={activity.title}
+                  position={[
+                    activity.address.latitude,
+                    activity.address.longitude,
+                  ]}
+                >
+                  {/* when we click on the marker, we see the popup */}
+                  <Popup>
+                    <img
+                      alt={activity.title}
+                      style={{ width: "100px", borderRadius: "0.5em" }}
+                      src={activity.imageUrl}
+                    />
+                    <p>{activity.title}</p>
+                  </Popup>
+                </Marker>
+              ))}
+            </MapContainer>
             {filteredActivities.map((activity) => (
               <div key={activity.id}>
                 <Activity activity={activity} />
