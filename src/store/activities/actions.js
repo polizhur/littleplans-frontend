@@ -98,11 +98,12 @@ export const postActivity = (
       dispatch(
         showMessageWithTimeout("success", false, response.data.message, 3000)
       );
+      console.log("create success", response.data.activity);
       dispatch(activityPostSuccess(response.data.activity));
       dispatch(appDoneLoading());
     } catch (error) {
       console.log("something went wrong");
-      console.log(error.response.data.message);
+      console.log(error);
       dispatch(setError(error.response.data.message));
       dispatch(appDoneLoading());
     }

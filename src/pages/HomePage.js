@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+//import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { filterActivites } from "../Lib/filterActivites";
 
 import Activity from "../components/Activity";

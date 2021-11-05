@@ -26,11 +26,17 @@ export default function activitiesSliceReducer(state = initialState, action) {
         error: action.payload,
       };
     }
-    case ACTIVITY_POST_SUCCESS:
+    case ACTIVITY_POST_SUCCESS: {
+      const newActivities = [...state.activities, action.payload];
+      newActivities.sort(function (a, b) {
+        return new Date(a.date) - new Date(b.date);
+      });
+      console.log("new activities", newActivities);
       return {
         ...state,
-        activities: [...state.activities, action.payload],
+        activities: newActivities,
       };
+    }
     default: {
       return state;
     }
