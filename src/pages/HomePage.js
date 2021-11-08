@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useHistory } from "react-router-dom";
 import { filterActivites } from "../Lib/filterActivites";
 
 import Activity from "../components/Activity";
@@ -15,7 +16,7 @@ import {
 
 export default function HomePage() {
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const loading = useSelector(selectActivitiesLoading);
   const allActivities = useSelector(selectActivities);
   const [filteredActivities, setFilteredActivities] = useState(allActivities);
@@ -33,6 +34,10 @@ export default function HomePage() {
     // create new array with only activities that match conditions
     const activitiesFiltered = filterActivites(allActivities, conditions);
     setFilteredActivities(activitiesFiltered);
+  };
+
+  const onPopupClick = (activityId) => {
+    history.push(`/activities/${activityId}`);
   };
 
   return (
@@ -85,6 +90,9 @@ export default function HomePage() {
                       src={activity.imageUrl}
                     />
                     <p>{activity.title}</p>
+                    <button onClick={() => onPopupClick(activity.id)}>
+                      More
+                    </button>
                   </Popup>
                 </Marker>
               ))}
