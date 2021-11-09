@@ -18,10 +18,14 @@ export default function MyCalendar() {
     dispatch(deleteUserActivity(id));
   };
 
+  const sortedActivities = [...activities].sort(
+    (a, b) => new Date(a.date) - new Date(b.date)
+  );
+
   return (
     <div className="container">
       <div className="activities-container">
-        {activities.map((activity) => (
+        {sortedActivities.map((activity) => (
           <div key={activity.id} className="activity-item">
             <Activity activity={activity} />
             <button

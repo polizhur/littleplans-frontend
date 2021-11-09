@@ -18,17 +18,21 @@ export default function Navigation() {
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={NavLink} to="/">
-        LITTLE PLANS
+        <img
+          src="projectLogo.png"
+          className="logo-image"
+          alt="The little plans"
+        />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav style={{ width: "100%" }} fill>
+        <Nav style={{ width: "80%" }} fill>
           <NavbarItem path="/" linkText="Home" />
           {token && !isProvider ? (
-            <NavbarItem path="/mycalendar" linkText="My Calendar" />
+            <NavbarItem path="/mycalendar" linkText="My calendar" />
           ) : null}
           {token && isProvider ? (
-            <NavbarItem path="/myprofile" linkText="Add your activity" />
+            <NavbarItem path="/myprofile" linkText="My activities" />
           ) : null}
           {loginLogoutControls}
         </Nav>

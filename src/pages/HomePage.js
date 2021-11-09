@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Carousel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useHistory } from "react-router-dom";
@@ -10,6 +11,7 @@ import SearchForm from "../components/SearchForm";
 import { addUserActivity } from "../store/user/actions";
 
 import { loadActivities } from "../store/activities/actions";
+import { showMessageWithTimeout } from "../store/appState/actions";
 import {
   selectActivitiesLoading,
   selectActivities,
@@ -34,7 +36,18 @@ export default function HomePage() {
   const triggerFilter = (conditions) => {
     // create new array with only activities that match conditions
     const activitiesFiltered = filterActivites(allActivities, conditions);
-    setFilteredActivities(activitiesFiltered);
+
+    if (activitiesFiltered.length === 0) {
+      dispatch(
+        showMessageWithTimeout(
+          "danger",
+          true,
+          "No results found for your search"
+        )
+      );
+    } else {
+      setFilteredActivities(activitiesFiltered);
+    }
   };
 
   const onPopupClick = (activityId) => {
@@ -44,7 +57,29 @@ export default function HomePage() {
   return (
     <div class="homepage mb-5">
       <div className="above-header">
-        <img src="header.jpeg" className="above-header-image" />
+        <Carousel fade className="carousel">
+          <Carousel.Item>
+            <img
+              src="header.jpeg"
+              className="above-header-image"
+              alt="First slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              src="header2.jpeg"
+              className="above-header-image"
+              alt="Second slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              src="header3.jpeg"
+              className="above-header-image"
+              alt="Third slide"
+            />
+          </Carousel.Item>
+        </Carousel>
       </div>
       <div className="header">
         <h1>List activities for your child with us!</h1>

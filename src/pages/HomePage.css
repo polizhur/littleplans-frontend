@@ -2,6 +2,19 @@
   background-image: url("../background.jpeg");
 }
 
+.carousel {
+  height: 20%;
+}
+
+.carouselImage {
+  height: 350px;
+}
+
+.carouselCaption {
+  color: rgb(0, 0, 0);
+  text-shadow: 0 0 3px #ffffff, 0 0 5px #4e6d50;
+}
+
 .above-header {
   text-align: center;
 }

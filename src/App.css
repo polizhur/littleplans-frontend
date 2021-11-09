@@ -24,3 +24,15 @@
   /* Support for IE. */
   font-feature-settings: "liga";
 }
+
+.logo-image {
+  height: 150px;
+  margin: 7px 0 0 0;
+  float: left;
+  border-radius: 100px;
+  display: block;
+  text-indent: -9999px;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+}
