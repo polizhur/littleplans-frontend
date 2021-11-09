@@ -19,15 +19,20 @@ export default function MyCalendar() {
   };
 
   return (
-    <div className="My Calendar">
-      {activities.map((activity) => (
-        <div key={activity.id}>
-          <Activity activity={activity} />
-          <button onClick={() => onDelete(activity.id)}>
-            Delete from my calendar
-          </button>
-        </div>
-      ))}
+    <div className="container">
+      <div className="activities-container">
+        {activities.map((activity) => (
+          <div key={activity.id} className="activity-item">
+            <Activity activity={activity} />
+            <button
+              className="btn btn-outline-danger"
+              onClick={() => onDelete(activity.id)}
+            >
+              Delete from my calendar
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

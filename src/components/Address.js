@@ -1,12 +1,7 @@
 export default function Address({ address }) {
   return (
-    <div>
-      <p>
-        {address.street} {address.number}
-      </p>
-      <p>
-        {address.city}, {address.country}
-      </p>
-    </div>
+    <span>
+      {address.street} {address.number} ({address.city}, {address.country})
+    </span>
   );
 }

@@ -5,7 +5,9 @@ import axios from "axios";
 import moment from "moment";
 import Address from "../components/Address";
 import Category from "../components/Category";
+import "./ActivityDetailPage.css";
 
+import { addUserActivity } from "../store/user/actions";
 import { startLoading, detailsFetched } from "../store/activityDetails/actions";
 import {
   selectActivityDetailsLoading,
@@ -30,6 +32,10 @@ export default function ActivityDetailPage() {
     dispatch(detailsFetched(loadedActivity));
   };
 
+  const onAdd = (id) => {
+    dispatch(addUserActivity(id));
+  };
+
   useEffect(() => {
     search();
   }, [id]);
@@ -37,24 +43,42 @@ export default function ActivityDetailPage() {
   console.log(`the activity: ${activity}, loading: ${loading}`);
 
   return (
-    <div className="ActivityDetailPage">
+    <div className="container mt-5 mb-5">
       <h1>{activity.title}</h1>
-      <img alt={activity.title} src={activity.imageUrl} />
-      <div className="details">
-        <h3>Category:</h3>
+      <p>
+        <img
+          className="activity-detail-image"
+          alt={activity.title}
+          src={activity.imageUrl}
+        />
+      </p>
+      <p>
+        <span class="material-icons orange600">category</span>{" "}
         <Category category={activity.category} />
-        <h3>Location:</h3>
+      </p>
+      <p>
+        <span class="material-icons orange600">house</span>{" "}
         <Address address={activity.address} />
-        <h3>Date:</h3>
-        <p>{moment(activity.date).format("LLL")}</p>
-        <h3>Duration:</h3>
-        <p>{activity.duration}</p>
-        <h3>Age:</h3>
-        <p>{activity.ageGroup.range}</p>
-        <h3>About:</h3>
-        <p>{activity.description}</p>
-        <button>Add to my calendar</button>
-      </div>
+      </p>
+      <p>
+        <span class="material-icons orange600">event</span>{" "}
+        {moment(activity.date).format("LLL")}
+      </p>
+      <p>
+        <span class="material-icons orange600">timer</span> {activity.duration}{" "}
+        min
+      </p>
+      <p>
+        <span class="material-icons orange600">face</span>{" "}
+        {activity.ageGroup.range}
+      </p>
+      <p>{activity.description}</p>
+      <button
+        className="btn btn-outline-secondary"
+        onClick={() => onAdd(activity.id)}
+      >
+        Add to my calendar
+      </button>
     </div>
   );
 }

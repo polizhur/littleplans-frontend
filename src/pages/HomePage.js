@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useHistory } from "react-router-dom";
 import { filterActivites } from "../Lib/filterActivites";
+import "./HomePage.css";
 
 import Activity from "../components/Activity";
 import SearchForm from "../components/SearchForm";
@@ -41,30 +42,24 @@ export default function HomePage() {
   };
 
   return (
-    <div>
-      <h1>List activities for your child with us!</h1>
+    <div class="homepage mb-5">
+      <div className="above-header">
+        <img src="header.jpeg" className="above-header-image" />
+      </div>
+      <div className="header">
+        <h1>List activities for your child with us!</h1>
+        <p>Find the best local kids activities and classes for all ages.</p>
+      </div>
       {loading ? (
         <em>Loading...</em>
       ) : (
-        <div>
-          <SearchForm triggerFilter={triggerFilter} />
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              margin: "0 -10px",
-            }}
-          >
+        <div className="container">
+          {/* Search form and map */}
+          <div className="search-container">
+            <SearchForm triggerFilter={triggerFilter} />
+
             <MapContainer
-              style={{
-                border: "2px solid",
-                borderRadius: "10px",
-                height: "50vw",
-                width: "60vw",
-                maxWidth: "1000px",
-                maxHeight: "800px",
-                margin: "0px 18%",
-              }}
+              className="map"
               center={[52.36994, 4.906]}
               zoom={13}
               scrollWheelZoom={true}
@@ -97,10 +92,17 @@ export default function HomePage() {
                 </Marker>
               ))}
             </MapContainer>
+          </div>
+
+          {/* Activities */}
+          <div className="activities-container">
             {filteredActivities.map((activity) => (
-              <div key={activity.id}>
+              <div key={activity.id} class="activity-item">
                 <Activity activity={activity} />
-                <button onClick={() => onAdd(activity.id)}>
+                <button
+                  onClick={() => onAdd(activity.id)}
+                  className="btn btn-outline-secondary"
+                >
                   Add to my calendar
                 </button>
               </div>

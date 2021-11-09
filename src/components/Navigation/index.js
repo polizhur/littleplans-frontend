@@ -28,7 +28,7 @@ export default function Navigation() {
             <NavbarItem path="/mycalendar" linkText="My Calendar" />
           ) : null}
           {token && isProvider ? (
-            <NavbarItem path="/myprofile" linkText="My profile" />
+            <NavbarItem path="/myprofile" linkText="Add your activity" />
           ) : null}
           {loginLogoutControls}
         </Nav>
