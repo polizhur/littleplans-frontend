@@ -1,42 +1,49 @@
-# Frontend template
+# THE LITTLE PLANS
 
-This is a simple react/redux/jwt template to start a project quickly
+## Introduction. What this app is about?
+
+How to solve a problem like a bored child? This indoor activity organisers app holds the answer becoming a gateway to the world of children's activities.
+
+THE LITTLE PLANS app helps families across Amsterdam discover things to do with their kids and find perfect options for children’s activities. Also, the app represents activity providers in Amsterdam and brought them all together under one roof.
+
+The search feature of the app allows users to search for relevant events according to the name, category, date and age. It makes it easy to discover things going on locally that your kids will love and make a schedule for the future period of time. 
 
 ## Table of contents:
 
-- **[Setup](#setup-how-to-use-this-template)**
-- **[Create React App docs](#cra-docs)**
+- **[App demo]**
+- **[Technology used]**
+- **[Goals for this project]**
+- **[User stories]**
+- **[Wireframe]**
+- **[Server repository]**
 
-## SETUP How to use this template
+## App demo
 
-1. Create a new project based on this template using the `Use this template` button
+## Technology used
 
-![HOW_TO_USE](https://user-images.githubusercontent.com/20372832/77003323-70966180-695d-11ea-8abe-b362d57135f3.gif)
+Back end
+* Express
+* REST
+* Sequelize as ORM
+* PostgreSQL
+* Node.js
+* One-to-many models
+* Many-to-many models
 
-2. Clone the app
+Front end
+* React
+* Redux
+* Axios
+* React Leaflet
+* Bootstrap
+* CSS
 
-```
-git clone git@github.com:YOUR_GITHUB_NAME/YOUR_PROJECT_NAME.git
-```
+## Goals for this project
 
-3. cd into your project
+## User stories
 
-```
-cd YOUR_PROJECT_NAME
-```
+## Wireframe
 
-4. install dependencies
+## Server repository
 
-```
-npm install
-```
 
-5. Start development server with npm start
-
-```
-npm start
-```
-
-## CRA docs
-
-The normal Create React App docs can be found in [CRA_DOCS.md](./CRA_DOCS.md)
