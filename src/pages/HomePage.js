@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useHistory } from "react-router-dom";
 import { filterActivites } from "../Lib/filterActivites";
+import { selectUser } from "../store/user/selectors";
 import "./HomePage.css";
 
 import Activity from "../components/Activity";
@@ -18,6 +19,7 @@ import {
 } from "../store/activities/selectors";
 
 export default function HomePage() {
+  const { token, isProvider } = useSelector(selectUser);
   const dispatch = useDispatch();
   const history = useHistory();
   const loading = useSelector(selectActivitiesLoading);
@@ -134,12 +136,14 @@ export default function HomePage() {
             {filteredActivities.map((activity) => (
               <div key={activity.id} class="activity-item">
                 <Activity activity={activity} />
-                <button
-                  onClick={() => onAdd(activity.id)}
-                  className="btn btn-outline-secondary"
-                >
-                  Add to my calendar
-                </button>
+                {token && !isProvider ? (
+                  <button
+                    onClick={() => onAdd(activity.id)}
+                    className="btn btn-outline-secondary"
+                  >
+                    Add to my calendar
+                  </button>
+                ) : null}
               </div>
             ))}
           </div>
