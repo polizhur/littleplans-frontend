@@ -1,4 +1,4 @@
-import { ACTIVITY_POST_SUCCESS } from "./actions";
+import { ACTIVITY_POST_SUCCESS, ACTIVITY_DELETE_SUCCESS } from "./actions";
 
 const initialState = {
   loading: false,
@@ -35,6 +35,16 @@ export default function activitiesSliceReducer(state = initialState, action) {
       return {
         ...state,
         activities: newActivities,
+      };
+    }
+    case ACTIVITY_DELETE_SUCCESS: {
+      const activityId = parseInt(action.payload);
+      const updatedActivities = state.activities.filter(
+        (activity) => activity.id !== activityId
+      );
+      return {
+        ...state,
+        activities: updatedActivities,
       };
     }
     default: {

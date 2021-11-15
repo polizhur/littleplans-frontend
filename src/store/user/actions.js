@@ -7,6 +7,7 @@ import {
   showMessageWithTimeout,
   setMessage,
 } from "../appState/actions";
+import { activityDeleteSuccess } from "../activities/actions";
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
@@ -58,6 +59,8 @@ const tokenStillValid = (userWithoutToken) => ({
 });
 
 export const logOut = () => ({ type: LOG_OUT });
+
+// thunks
 
 export const signUp = (name, email, password, isProvider) => {
   return async (dispatch, getState) => {
@@ -195,6 +198,7 @@ export const deleteProviderActivity = (activityId) => {
       );
 
       dispatch(deleteProviderActivitySuccess(activityId));
+      dispatch(activityDeleteSuccess(activityId));
       dispatch(appDoneLoading());
       dispatch(
         showMessageWithTimeout("success", false, response.data.message, 1500)

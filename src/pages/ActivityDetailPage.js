@@ -6,6 +6,7 @@ import moment from "moment";
 import Address from "../components/Address";
 import Category from "../components/Category";
 import "./ActivityDetailPage.css";
+import { selectUser } from "../store/user/selectors";
 
 import { addUserActivity } from "../store/user/actions";
 import { startLoading, detailsFetched } from "../store/activityDetails/actions";
@@ -17,6 +18,7 @@ import {
 const API_URL = `http://localhost:4000/activities`;
 
 export default function ActivityDetailPage() {
+  const { token, isProvider } = useSelector(selectUser);
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -73,12 +75,14 @@ export default function ActivityDetailPage() {
         {activity.ageGroup.range}
       </p>
       <p>{activity.description}</p>
-      <button
-        className="btn btn-outline-secondary"
-        onClick={() => onAdd(activity.id)}
-      >
-        Add to my calendar
-      </button>
+      {token && !isProvider ? (
+        <button
+          className="btn btn-outline-secondary"
+          onClick={() => onAdd(activity.id)}
+        >
+          Add to my calendar
+        </button>
+      ) : null}
     </div>
   );
 }

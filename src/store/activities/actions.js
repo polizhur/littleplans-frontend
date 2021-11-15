@@ -9,6 +9,7 @@ import {
 import { addProviderActivitySuccess } from "../user/actions";
 
 export const ACTIVITY_POST_SUCCESS = "ACTIVITY_POST_SUCCESS";
+export const ACTIVITY_DELETE_SUCCESS = "ACTIVITY_DELETE_SUCCESS";
 
 const API_URL = `http://localhost:4000/activities`;
 
@@ -113,3 +114,8 @@ export const postActivity = (
     // console.log("Yep!", response);
   };
 };
+
+export const activityDeleteSuccess = (activityId) => ({
+  type: ACTIVITY_DELETE_SUCCESS,
+  payload: activityId,
+});
