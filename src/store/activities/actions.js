@@ -6,6 +6,7 @@ import {
   appDoneLoading,
   showMessageWithTimeout,
 } from "../appState/actions";
+import { addProviderActivitySuccess } from "../user/actions";
 
 export const ACTIVITY_POST_SUCCESS = "ACTIVITY_POST_SUCCESS";
 
@@ -100,6 +101,7 @@ export const postActivity = (
       );
       console.log("create success", response.data.activity);
       dispatch(activityPostSuccess(response.data.activity));
+      dispatch(addProviderActivitySuccess(response.data.activity));
       dispatch(appDoneLoading());
     } catch (error) {
       console.log("something went wrong");

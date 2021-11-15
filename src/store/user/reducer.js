@@ -3,7 +3,9 @@ import {
   LOGIN_SUCCESS,
   TOKEN_STILL_VALID,
   DELETE_ACTIVITY_SUCCESS,
+  DELETE_PROVIDER_ACTIVITY_SUCCESS,
   ADD_USERACTIVITY_SUCCESS,
+  ADD_PROVIDERACTIVITY_SUCCESS,
 } from "./actions";
 
 const initialState = {
@@ -11,6 +13,7 @@ const initialState = {
   name: null,
   email: null,
   activities: [],
+  providerActivities: [],
 };
 
 export default (state = initialState, action) => {
@@ -27,7 +30,7 @@ export default (state = initialState, action) => {
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };
 
-    case DELETE_ACTIVITY_SUCCESS:
+    case DELETE_ACTIVITY_SUCCESS: {
       const activityId = parseInt(action.payload);
       const updatedActivities = state.activities.filter(
         (activity) => activity.id !== activityId
@@ -37,12 +40,32 @@ export default (state = initialState, action) => {
         ...state,
         activities: updatedActivities,
       };
+    }
+
+    case DELETE_PROVIDER_ACTIVITY_SUCCESS: {
+      const activityId = parseInt(action.payload);
+      const updatedActivities = state.providerActivities.filter(
+        (activity) => activity.id !== activityId
+      );
+
+      return {
+        ...state,
+        providerActivities: updatedActivities,
+      };
+    }
 
     case ADD_USERACTIVITY_SUCCESS:
       return {
         ...state,
         activities: [...state.activities, action.payload],
       };
+
+    case ADD_PROVIDERACTIVITY_SUCCESS: {
+      return {
+        ...state,
+        providerActivities: [...state.providerActivities, action.payload],
+      };
+    }
 
     default:
       return state;

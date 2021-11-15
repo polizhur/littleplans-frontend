@@ -12,7 +12,10 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
 export const DELETE_ACTIVITY_SUCCESS = "DELETE_ACTIVITY_SUCCESS";
+export const DELETE_PROVIDER_ACTIVITY_SUCCESS =
+  "DELETE_PROVIDER_ACTIVITY_SUCCESS";
 export const ADD_USERACTIVITY_SUCCESS = "ADD_USERACTIVITY_SUCCESS";
+export const ADD_PROVIDERACTIVITY_SUCCESS = "ADD_PROVIDERACTIVITY_SUCCESS";
 
 const loginSuccess = (userWithToken) => {
   return {
@@ -28,9 +31,23 @@ const deleteActivitySuccess = (activityId) => {
   };
 };
 
+const deleteProviderActivitySuccess = (activityId) => {
+  return {
+    type: DELETE_PROVIDER_ACTIVITY_SUCCESS,
+    payload: activityId,
+  };
+};
+
 const addUserActivitySuccess = (activity) => {
   return {
     type: ADD_USERACTIVITY_SUCCESS,
+    payload: activity,
+  };
+};
+
+export const addProviderActivitySuccess = (activity) => {
+  return {
+    type: ADD_PROVIDERACTIVITY_SUCCESS,
     payload: activity,
   };
 };
@@ -144,6 +161,40 @@ export const deleteUserActivity = (activityId) => {
       );
 
       dispatch(deleteActivitySuccess(activityId));
+      dispatch(appDoneLoading());
+      dispatch(
+        showMessageWithTimeout("success", false, response.data.message, 1500)
+      );
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(setMessage("danger", true, error.response.data.message));
+      } else {
+        console.log(error.message);
+        dispatch(setMessage("danger", true, error.message));
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const deleteProviderActivity = (activityId) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+
+    // if we have no token, stop
+    if (token === null) return;
+
+    dispatch(appLoading());
+    try {
+      const response = await axios.delete(
+        `${apiUrl}/activities/${activityId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      dispatch(deleteProviderActivitySuccess(activityId));
       dispatch(appDoneLoading());
       dispatch(
         showMessageWithTimeout("success", false, response.data.message, 1500)
