@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { postActivity } from "../store/activities/actions";
 import Axios from "axios";
-import { useHistory, Link } from "react-router-dom";
 
 export default function ActivityForm() {
   const dispatch = useDispatch();
@@ -25,7 +24,6 @@ export default function ActivityForm() {
 
   const [categories, setCategories] = useState([]);
   const [ageGroups, setAgeGroups] = useState([]);
-  const history = useHistory();
 
   useEffect(() => {
     const getCategories = async () => {
@@ -117,7 +115,7 @@ export default function ActivityForm() {
           onChange={(e) => setImageUrl(e.target.value)}
         />
 
-        <img src={`${imageUrl}`} />
+        <img src={`${imageUrl}`} alt="" />
       </div>
 
       <div className="mb-3 row">

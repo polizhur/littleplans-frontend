@@ -24,22 +24,23 @@ export default function ActivityDetailPage() {
   const loading = useSelector(selectActivityDetailsLoading);
   const activity = useSelector(selectActivityDetails);
 
-  const search = async () => {
-    dispatch(startLoading());
-    const res = await axios.get(`${apiUrl}/activities/${id}`);
-
-    const loadedActivity = res.data;
-
-    dispatch(detailsFetched(loadedActivity));
-  };
-
   const onAdd = (id) => {
     dispatch(addUserActivity(id));
   };
 
   useEffect(() => {
+    const search = async () => {
+      dispatch(startLoading());
+      const res = await axios.get(`${apiUrl}/activities/${id}`);
+
+      const loadedActivity = res.data;
+
+      dispatch(detailsFetched(loadedActivity));
+    };
+
     search();
-  }, [id]);
+  }, [id, dispatch]);
+
   if (loading || !activity) return <em>Loading</em>;
   console.log(`the activity: ${activity}, loading: ${loading}`);
 

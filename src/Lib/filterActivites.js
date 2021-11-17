@@ -14,7 +14,7 @@ export const filterActivites = (allActivities, conditions) => {
   // Filter on categories
   if (categoryId) {
     filteredActivities = filteredActivities.filter((event) => {
-      return event.categoryId == categoryId;
+      return event.categoryId === parseInt(categoryId);
     });
   }
 
@@ -28,7 +28,7 @@ export const filterActivites = (allActivities, conditions) => {
   // Filter on age
   if (ageGroupId) {
     filteredActivities = filteredActivities.filter((event) => {
-      return event.ageGroupId == ageGroupId;
+      return event.ageGroupId === parseInt(ageGroupId);
     });
   }
 

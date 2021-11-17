@@ -16,7 +16,7 @@ const initialState = {
   providerActivities: [],
 };
 
-export default (state = initialState, action) => {
+export default function userSliceReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       console.log(action.payload);
@@ -70,4 +70,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
