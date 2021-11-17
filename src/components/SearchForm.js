@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import "./SearchForm.css";
+import { apiUrl } from "../config/constants";
 
 export default function SearchForm(props) {
   const { triggerFilter } = props;
@@ -15,9 +16,7 @@ export default function SearchForm(props) {
 
   useEffect(() => {
     const getCategories = async () => {
-      const categoryResponse = await Axios.get(
-        "http://localhost:4000/categories"
-      );
+      const categoryResponse = await Axios.get(`${apiUrl}/categories`);
       setCategories(categoryResponse.data);
     };
     getCategories();
@@ -25,9 +24,7 @@ export default function SearchForm(props) {
 
   useEffect(() => {
     const getAgeGroups = async () => {
-      const ageGroupResponse = await Axios.get(
-        "http://localhost:4000/ageGroups"
-      );
+      const ageGroupResponse = await Axios.get(`${apiUrl}/ageGroups`);
       setAgeGroups(ageGroupResponse.data);
     };
     getAgeGroups();

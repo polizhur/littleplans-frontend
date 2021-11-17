@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { apiUrl } from "../config/constants";
 import { useDispatch } from "react-redux";
 import { postActivity } from "../store/activities/actions";
 import Axios from "axios";
@@ -27,9 +28,7 @@ export default function ActivityForm() {
 
   useEffect(() => {
     const getCategories = async () => {
-      const categoryResponse = await Axios.get(
-        "http://localhost:4000/categories"
-      );
+      const categoryResponse = await Axios.get(`${apiUrl}/categories`);
       setCategories(categoryResponse.data);
       console.log(categoryResponse.data[0].id);
       setCategoryId(categoryResponse.data[0].id);
@@ -39,9 +38,7 @@ export default function ActivityForm() {
 
   useEffect(() => {
     const getAgeGroups = async () => {
-      const ageGroupResponse = await Axios.get(
-        "http://localhost:4000/ageGroups"
-      );
+      const ageGroupResponse = await Axios.get(`${apiUrl}/ageGroups`);
       setAgeGroups(ageGroupResponse.data);
       setAgeGroupId(ageGroupResponse.data[0].id);
     };
