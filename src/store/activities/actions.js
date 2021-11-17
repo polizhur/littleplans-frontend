@@ -11,8 +11,6 @@ import { addProviderActivitySuccess } from "../user/actions";
 export const ACTIVITY_POST_SUCCESS = "ACTIVITY_POST_SUCCESS";
 export const ACTIVITY_DELETE_SUCCESS = "ACTIVITY_DELETE_SUCCESS";
 
-const API_URL = `http://localhost:4000/activities`;
-
 export function startLoading() {
   return {
     type: "activities/startLoading",
@@ -36,7 +34,7 @@ export function setError(error) {
 export const loadActivities = () => {
   return async (dispatch, getState) => {
     dispatch(startLoading());
-    const res = await axios.get(`${API_URL}`);
+    const res = await axios.get(`${apiUrl}/activities`);
 
     const loadedActivities = res.data;
 

@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { apiUrl } from "../config/constants";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import moment from "moment";
@@ -15,8 +16,6 @@ import {
   selectActivityDetails,
 } from "../store/activityDetails/selectors";
 
-const API_URL = `http://localhost:4000/activities`;
-
 export default function ActivityDetailPage() {
   const { token, isProvider } = useSelector(selectUser);
   const { id } = useParams();
@@ -27,7 +26,7 @@ export default function ActivityDetailPage() {
 
   const search = async () => {
     dispatch(startLoading());
-    const res = await axios.get(`${API_URL}/${id}`);
+    const res = await axios.get(`${apiUrl}/activities/${id}`);
 
     const loadedActivity = res.data;
 
