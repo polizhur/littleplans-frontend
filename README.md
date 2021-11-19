@@ -71,4 +71,4 @@ As a provider:
 
 ## Server repository
 
-
+The back-end was built in express and it is a REST a API. The database is built using Postgres and Sequelize.
