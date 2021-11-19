@@ -40,7 +40,32 @@ Front end
 
 ## Goals for this project
 
+* build a working prototype in 9 days from scratch
+* apply skills which I learnt during Codaisseur bootcamp
+* gain experience developing a full-stack app
+* practice reading documentation 
+* create user-friendly functionality
+* practice learning new technology independently
+* showcase development approach of using wireframes and user stories
+* design a data model
+* focus on git flow to create good commit messages
+* improve my foundational knowledge of the stylesheet language
+
 ## User stories
+
+As a user:
+
+* I want to view a list of the best activities of the upcoming week on the main page of the app.
+* I would like to discover activities within seconds by using a search bar and filtering them according to a name, category, age, time.
+* I would like to see a map and filter activities according to the distance and find happenings close to me.
+* I would like to see details of each activity with visuals of the space/activity so I have a better idea of what I am interested in.
+* I want to be able to create an account (space) to save my preferences, add profiles for my children and manage my schedule easily (delete/add).
+
+As a provider:
+
+* I want a profile to be created for me.
+* I want to be able to post activities with all the details that the user can see on the app.
+* I want to be able to delete activities if it’s necessary.
 
 ## Wireframe
 
